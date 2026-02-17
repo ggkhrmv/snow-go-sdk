@@ -93,6 +93,6 @@ func (o *WriteOptions) apply(q url.Values) {
 }
 
 // pointer helpers (handy in callers)
-func Int(v int) *int             { return &v }
-func Bool(v bool) *bool          { return &v }
-func String(v string) *string    { return &v }
+func Int(v int) *int          { return &v }
+func Bool(v bool) *bool       { return &v }
+func String(v string) *string { return &v }

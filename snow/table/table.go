@@ -8,7 +8,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/ggkhrmv/snow-go-sdk/pkg"
+	snow "github.com/ggkhrmv/snow-go-sdk/snow"
 )
 
 var (
@@ -19,11 +19,11 @@ var (
 
 // Client is a Table API client bound to a specific table, returning records of type T.
 type Client[T any] struct {
-	r     pkg.Requester
+	r     snow.Requester
 	table string
 }
 
-func New[T any](r pkg.Requester, tableName string) *Client[T] {
+func New[T any](r snow.Requester, tableName string) *Client[T] {
 	return &Client[T]{
 		r:     r,
 		table: strings.TrimSpace(tableName),
@@ -31,7 +31,7 @@ func New[T any](r pkg.Requester, tableName string) *Client[T] {
 }
 
 // Convenience: default to dynamic records
-func NewMap(r pkg.Requester, tableName string) *Client[map[string]any] {
+func NewMap(r snow.Requester, tableName string) *Client[map[string]any] {
 	return New[map[string]any](r, tableName)
 }
 

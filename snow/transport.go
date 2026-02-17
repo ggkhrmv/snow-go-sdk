@@ -22,6 +22,7 @@ func (c *Client) NewRequest(ctx context.Context, method, p string, query url.Val
 	}
 
 	u := *c.baseURL // copy
+	// TODO: use url.JoinPath instead of path.Join
 	u.Path = path.Join(c.baseURL.Path, p)
 
 	if len(query) > 0 {
