@@ -1,4 +1,4 @@
-package pkg
+package snow
 
 import (
 	"bytes"
@@ -93,4 +93,33 @@ func (c *Client) Do(req *http.Request, out any) error {
 		return err
 	}
 	return nil
+}
+
+// DoWithResponse performs the request and returns both the raw response and unmarshals the body
+func (c *Client) DoWithResponse(req *http.Request, out any) (*http.Response, error) {
+    resp, err := c.httpClient.Do(req)
+    if err != nil {
+        return nil, err
+    }
+    defer resp.Body.Close()
+
+    // Read the body
+    data, err := io.ReadAll(resp.Body)
+    if err != nil {
+        return resp, err
+    }
+
+    // Check for HTTP errors
+    if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+        return resp, parseAPIError(resp.StatusCode, data)
+    }
+
+    // Unmarshal if output is provided
+    if out != nil {
+        if err := json.Unmarshal(data, out); err != nil {
+            return resp, err
+        }
+    }
+
+    return resp, nil
 }

@@ -1,4 +1,4 @@
-package pkg
+package snow
 
 import (
 	"context"
@@ -10,4 +10,5 @@ import (
 type Requester interface {
 	NewRequest(ctx context.Context, method, path string, query url.Values, body any) (*http.Request, error)
 	Do(req *http.Request, out any) error
+	DoWithResponse(req *http.Request, out any) (*http.Response, error)
 }

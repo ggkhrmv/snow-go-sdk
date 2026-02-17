@@ -1,4 +1,4 @@
-package pkg
+package snow
 
 import (
 	"net/http"
