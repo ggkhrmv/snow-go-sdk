@@ -9,7 +9,9 @@ import (
 var (
 	ErrMissingInstanceURL = errors.New("missing instance URL: use WithInstanceURL")
 	ErrMissingAuth        = errors.New("missing auth: use WithBasicAuth (or other auth options later)")
+	ErrMissingHTTPClient  = errors.New("missing http client")
 	ErrInvalidBasicAuth   = errors.New("basic auth requires non-empty username and password")
+	ErrNilRequest         = errors.New("request is nil")
 )
 
 type APIError struct {

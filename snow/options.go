@@ -21,6 +21,8 @@ func WithInstanceURL(instance string) Option {
 
 		// normalize: no trailing slash
 		u.Path = strings.TrimRight(u.Path, "/")
+		u.RawQuery = ""
+		u.Fragment = ""
 		c.baseURL = u
 		return nil
 	}
