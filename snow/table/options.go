@@ -52,7 +52,7 @@ type WriteOptions struct {
 }
 
 type DeleteOptions struct {
-	QueryNoDomain *bool // Restrict to user's domains
+	QueryNoDomain *bool // Bypass domain restrictions (include records outside user's domains; requires special permissions)
 }
 
 // Validate checks for configuration errors
