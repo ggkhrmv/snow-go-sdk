@@ -44,7 +44,7 @@ type ErrorDetail struct {
     Detail  string `json:"detail,omitempty"`
 }
 
-// Internal unwrapping types for backward compatibility
+// Internal envelope types matching the ServiceNow result wrapper.
 type resultList[T any] struct {
     Result []T `json:"result"`
 }

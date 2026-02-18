@@ -60,7 +60,8 @@ type Incident struct {
 }
 
 incidents := table.New[Incident](client, "incident")
-item, err := incidents.GetSimple(ctx, "46d44f2c0a0a0b5700c77f9bf387afe3", nil)
+resp, err := incidents.Get(ctx, "46d44f2c0a0a0b5700c77f9bf387afe3", nil)
+item := resp.Result
 ```
 
 ## Encoded query builder

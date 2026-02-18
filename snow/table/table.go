@@ -97,15 +97,6 @@ func (c *Client[T]) List(ctx context.Context, opts *ListOptions) (*ListResponse[
 	return listResp, nil
 }
 
-// ListSimple returns just the records without metadata (backward compatible).
-func (c *Client[T]) ListSimple(ctx context.Context, opts *ListOptions) ([]T, error) {
-	resp, err := c.List(ctx, opts)
-	if err != nil {
-		return nil, err
-	}
-	return resp.Result, nil
-}
-
 func (c *Client[T]) Get(ctx context.Context, sysID string, opts *GetOptions) (*GetResponse[T], error) {
 	var zero *GetResponse[T]
 
@@ -132,16 +123,6 @@ func (c *Client[T]) Get(ctx context.Context, sysID string, opts *GetOptions) (*G
 	}
 
 	return &GetResponse[T]{Result: out.Result}, nil
-}
-
-// GetSimple returns just the record (backward compatible).
-func (c *Client[T]) GetSimple(ctx context.Context, sysID string, opts *GetOptions) (T, error) {
-	var zero T
-	resp, err := c.Get(ctx, sysID, opts)
-	if err != nil {
-		return zero, err
-	}
-	return resp.Result, nil
 }
 
 func (c *Client[T]) Create(ctx context.Context, in any, opts *WriteOptions) (*WriteResponse[T], error) {
