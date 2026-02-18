@@ -25,15 +25,24 @@ type Client[T any] struct {
 	table string
 }
 
-func New[T any](r snow.Requester, tableName string) *Client[T] {
+func New[T any](r snow.Requester, tableName string) (*Client[T], error) {
+	tableName = strings.TrimSpace(tableName)
+
+	if r == nil {
+		return nil, ErrNilRequester
+	}
+	if tableName == "" || strings.ContainsAny(tableName, `/\\`) {
+		return nil, ErrInvalidTableName
+	}
+
 	return &Client[T]{
 		r:     r,
-		table: strings.TrimSpace(tableName),
-	}
+		table: tableName,
+	}, nil
 }
 
 // NewMap is a convenience constructor returning dynamic records.
-func NewMap(r snow.Requester, tableName string) *Client[map[string]any] {
+func NewMap(r snow.Requester, tableName string) (*Client[map[string]any], error) {
 	return New[map[string]any](r, tableName)
 }
 
